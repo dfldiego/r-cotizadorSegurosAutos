@@ -41,13 +41,25 @@ const Boton = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 const Formulario = () => {
 
+    //state de datos del formulario
     const [datos, setDatos] = useState({
         marca: '',
         year: '',
         plan: ''
     });
+    //state de error
+    const [error, setError] = useState(false);
 
     //Extraer los datos del state.
     const { marca, year, plan } = datos;
@@ -60,8 +72,37 @@ const Formulario = () => {
         })
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        //Validar si hay campos vacios
+        if (marca.trim() === '' || year.trim() === '' || plan.trim() === '') {
+            setError(true);
+            return;
+        }
+
+        //Pasa la validacion
+        setError(false);
+
+        //obtener la diferencia de años
+
+        //por cada año -> restar 3% del valor
+
+        //americano 15%
+        //asiatico 5%
+        //europeo 30%
+
+        //plan basico aumenta 20%
+
+        //plan completo 50%
+
+        //total
+    }
+
     return (
-        <form>
+        <form
+            onSubmit={handleSubmit}
+        >
+            {error ? <Error>Todos los campos son obligatorios</Error> : null}
             <Campo>
                 <Label>Marca</Label>
                 <Select
@@ -112,7 +153,7 @@ const Formulario = () => {
                     onChange={obtenerInformacion}
                 /> Completo
             </Campo>
-            <Boton type="button">Cotizar</Boton>
+            <Boton type="submit">Cotizar</Boton>
         </form>
     );
 }
