@@ -24,6 +24,8 @@ span.resultado {
   width: 100%;
 }
 
+/*Estilos de la Animacion*/
+
 .resultado-enter {
   transition: .5s;
 }
