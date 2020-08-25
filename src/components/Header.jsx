@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
 
 //componente de estilo
 const ContenedorHeader = styled.header`
@@ -23,6 +24,10 @@ const Header = ({ titulo }) => {
             <TextoHeader>{titulo}</TextoHeader>
         </ContenedorHeader>
     );
+}
+
+Header.propTypes = {
+    titulo: PropTypes.string.isRequired
 }
 
 export default Header;
