@@ -51,7 +51,7 @@ const Error = styled.div`
     margin-bottom: 2rem;
 `;
 
-const Formulario = ({ setResumen }) => {
+const Formulario = ({ setResumen, setCargando }) => {
 
     //state de datos del formulario
     const [datos, setDatos] = useState({
@@ -105,11 +105,20 @@ const Formulario = ({ setResumen }) => {
         const incrementoPlan = obtenerPlan(plan);
         resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
 
-        //total
-        setResumen({
-            cotizacion: resultado,
-            datos: datos
-        });
+        setCargando(true);
+
+        setTimeout(() => {
+            //Elimina el Spinner
+            setCargando(false);
+
+            //Pasa la informacion al componente principal
+            setResumen({
+                cotizacion: resultado,
+                datos: datos
+            });
+        }, 3000);
+
+
     }
 
     return (
